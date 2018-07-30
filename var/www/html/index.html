@@ -743,7 +743,7 @@
             .append('div')
             .attr('class','card m-1')
             .append('div')
-            .attr('class','card-header')
+            .attr('class','card-header colorpicker-component')
             .attr('id',newId+"_header")
             .attr('data-toggle','tooltip')
             .attr('data-placement','top')
@@ -762,8 +762,12 @@
             .style('float','right')
             .text('Remove')
           
-          $('#channelColorPicker').colorpicker('setValue', makeRandomColor())
+          
+          $('#'+newId+'_header').colorpicker({
+          	'color' : $('#channelColorPicker').colorpicker('getValue')
+          }).on('changeColor', changeChannelColor)
           $(document).on('click','#'+newId+'_header',raiseChannel)
+          $('#channelColorPicker').colorpicker('setValue', makeRandomColor())
         }
       }
       
@@ -786,7 +790,12 @@
           }
         }
       }
-      
+      function changeChannelColor(event){
+      	console.log(event.color.toHex())
+      	console.log(event.target.id)
+      	$('#'+event.target.id).css('background-color',event.color.toHex())
+      	raiseChannel(event)
+      }
       function raiseChannel(event){
         id = event.target.id.split('_')[0]
         fftGraph.removePath('#'+id)
@@ -794,7 +803,7 @@
         chWithColor = []
         for(i in displayedChannels){
           ch = displayedChannels[i]
-          color = document.getElementById(ch.name+"_header").style.backgroundColor
+          color = $('#'+ch.name+"_header").css('background-color')
           chWithColor.push([ch,color])
         }
         fftGraph.updateData(chWithColor)
