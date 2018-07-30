@@ -165,13 +165,13 @@
                         <button class="btn btn-sm btn-outline-secondary" id="zoomOut"><img src="images/zoom-out.svg" width="15px" height="15px"></button>
                       </div>
                       <div class="btn-group btn-group-toggle ml-2" data-toggle="buttons"> <!-- data transforms -->
-                        <label class="btn btn-sm btn-outline-secondary active">
-                          <input type="radio" name="transform" id="filter_none" autocomplete="off" checked>
-                          No Filter
-                        </label>
                         <label class="btn btn-sm btn-outline-secondary">
+                          <input type="radio" name="transform" id="filter_none" autocomplete="off" checked>
+                          DC coupled
+                        </label>
+                        <label class="btn btn-sm btn-outline-secondary active">
                           <input type="radio" name="transform" id="filter_iir" autocomplete="off">
-                          IIR
+                          AC coupled
                         </label>
                       </div>
                       
@@ -258,7 +258,7 @@
     
       var graphTimer;
       var streamGraph = new StreamGraph(700,400,'#streamGraph')
-      var iirOn = false;
+      var isAC = true;
       var fftGraph = new FFTGraph(700,400,'#fftGraph')
       
       
@@ -274,7 +274,7 @@
       streamSocket.onmessage = function(event){
         if(document.getElementById("streamTab").classList.contains("active")){
           sensorDataList = JSON.parse(event.data)
-          filter = iirOn? iirFilter : dummyFilter; //both are located in gcdc.js
+          filter = isAC? iirFilter : dummyFilter; //both are located in gcdc.js
           for(i in sensorDataList){
             nodeList[i].appendData(sensorDataList[i],filter)
           }
@@ -577,7 +577,7 @@
       
       /////////////////////////////////////
       // event handlers for sidebar channel interface
-      $(document).on("click","#addChannel",addChannel)
+      $(document).on("click","#addChannel",addChannelClicked)
       $('#cardNodeDrop').on('click','div a',function(){
         nodeSelect = Number($(this).text())
         $('#cardNodeDropBtn').text('Node: '+$(this).text())
@@ -713,12 +713,16 @@
       // function definitions for Sidebar channel interface
       var displayedChannels = []
       var nodeSelect, channelSelect;
-      function addChannel(){
+      function addChannelClicked(){
         if(typeof nodeSelect=='undefined' || typeof channelSelect=='undefined'){
           return; //fill it in ya big dummy
         }
         
         newId = 'n'+nodeSelect+'c'+channelSelect
+        addChannel(newId)
+      }
+      
+      function addChannel(newId){
         isDisplayed = false;      
         for(i in displayedChannels){
           ch  = displayedChannels[i]
@@ -727,7 +731,11 @@
           }
         }
         if( !(isDisplayed)){
-          displayedChannels.push(nodeList[nodeSelect][channelSelect])
+          node = Number(newId.split('n')[1].split('c')[0])
+          channel = newId.split('c')[1]
+          console.log(node)
+          console.log(channel)
+          displayedChannels.push(nodeList[node][channel])
           d3.select('#displayedChannelsList').append('li')
             .attr('id',newId+'_card')
            
@@ -746,7 +754,7 @@
           d3.select('#'+newId+"_card .card")  
             .append('div')
             .attr('class','card-body p-1')
-            .text('Node: '+nodeSelect+',   Ch: '+channelSelect+',   chID: '+newId)
+            .text('Node: '+node+',   Ch: '+channel+',   chID: '+newId)
             .append('button')
             .attr('type','button')
             .attr('class','btn btn-sm btn-outline-danger p-1 remove-channel-btn')
@@ -791,7 +799,13 @@
         }
         fftGraph.updateData(chWithColor)
         streamGraph.updateData(chWithColor)
-        
+      }
+      
+      //adds data
+      function initChannels(){
+        for(i in d3.range(10)){
+          addChannel('n'+i+'cmag')
+        }
       }
       
       
@@ -860,9 +874,9 @@
       }
       
       function filterToggle(event){
-        iirOn = false;
+        isAC = false;
         if(event.target.id == "filter_iir"){
-          iirOn = true;
+          isAC = true;
         }
       }
       
@@ -873,6 +887,13 @@
         streamGraph.Node.mag.vis= $("#channel_mag").prop('checked')
         streamGraph.updateGraph()
       }
+      
+      
+      
+      
+      $(document).ready(function(){
+        initChannels()
+      })
     </script>
   </body>
 </html>

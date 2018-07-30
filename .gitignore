@@ -1,0 +1,5 @@
+#ignore weird joe-generated files
+*~
+
+#ignore weird .# files
+.\#*
