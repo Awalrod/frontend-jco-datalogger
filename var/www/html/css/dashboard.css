@@ -190,8 +190,8 @@ th a:hover, th a:active{
 .graph .group {
   fill: none;
   stroke: black;
-  stroke-width: 1;
-  opacity: .85;
+  stroke-width: 1.25;
+  opacity: .90;
 }
 
 .stream line.horizontalGuide{
