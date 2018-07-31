@@ -21,42 +21,11 @@
         <nav class="col-md-3 col-sm-3 d-none d-md-block bg-light">
           <div class="sidebar-sticky mt-5">
             
-            <ul class="nav flex-column">
-              
-              <li class="nav-item m-1">
-                <div class="btn-group-vertical">
-                  <button class="btn btn-success nav-button" type="button" id="startLogging">Start Logging</btn>
-                  <button class="btn btn-danger nav-button" type="button" id="stopLogging">Stop Logging</btn>              
-                </div>
-                <div class="collapse mt-1" id="fileAlert"> 
-                  <div class="alert alert-success show" role="alert">
-                    Files are being recorded
-                  </div>
-                </div>
-              </li>
-              <li class="nav-item m-1">
-                
-                <div class="input-group mb-1">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Sample size:</span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="samples perfile" id="sampleSize">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" id="sampleSizeBtn">Set</button>
-                  </div>
-                </div>
-                
-                <div class="input-group mb-1">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Filename:</span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="File name" id="fileName">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" id="fileNameBtn">Set</button>
-                  </div>
-                </div>
-                
-                <div class="input-group mb-1">
+            
+
+            <ul clas="nav flex-column">
+              <div class="input-group mb-1">
+                <li class="nav-item m-1">
                   <div class="input-group-prepend">
                     <span class="input-group-text">Sample rate:</span>
                   </div>
@@ -66,8 +35,8 @@
                   </div>
                 </div>
               </li>
-              
             </ul>
+            
             <div class="card">
               <div class="card-header">
                 Add Channel to Graph Display
@@ -115,6 +84,41 @@
             </div>
             <ul class="nav flex-column" id="displayedChannelsList">
             
+            </ul>
+            <ul class="nav flex-column">
+              
+              <li class="nav-item m-1">
+                <div class="btn-group-vertical">
+                  <button class="btn btn-success nav-button" type="button" id="startLogging">Begin Recording</btn>
+                  <button class="btn btn-danger nav-button" type="button" id="stopLogging">Stop Recording</btn>              
+                </div>
+                <div class="collapse mt-1" id="fileAlert"> 
+                  <div class="alert alert-success show" role="alert">
+                    Files are being recorded
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item m-1">
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Sample size:</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="samples perfile" id="sampleSize">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" id="sampleSizeBtn">Set</button>
+                  </div>
+                </div>
+                
+                <div class="input-group mb-1">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Filename:</span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="File name" id="fileName">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" id="fileNameBtn">Set</button>
+                  </div>
+                </div>
+              </li>
             </ul>
           </div>
         </nav>
