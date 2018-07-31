@@ -270,6 +270,7 @@
       
       streamSocket.onopen = function(event){
         streamSocket.send('nodeid=all')
+        startStream()
       }
       streamSocket.onmessage = function(event){
         if(document.getElementById("streamTab").classList.contains("active")){
@@ -902,7 +903,6 @@
       
       $(document).ready(function(){
         initChannels()
-        startStream()
       })
     </script>
   </body>
