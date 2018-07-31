@@ -1,8 +1,8 @@
 //streamGraph constructor
 
 function StreamGraph(width,height,id){
-    this.min=-300000
-    this.max= 300000
+    this.min=-5000
+    this.max= 5000
     this.width=width
     this.height=height
     this.limit = 2000
