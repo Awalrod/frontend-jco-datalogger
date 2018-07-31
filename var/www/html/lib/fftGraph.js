@@ -102,11 +102,9 @@ function FFTGraph(width, height, id){
                     }
                 }
                 sr = 1000/dif
-                if(f_axis == null){
-                    f_axis = new Array(this.desiredSize/2).fill(0).map((d,i)=>{
-                        return i*(sr/2)/(this.desiredSize/2)
-                    })
-                }
+                f_axis = new Array(this.desiredSize/2).fill(0).map((d,i)=>{
+                    return i*(sr/2)/(this.desiredSize/2)
+                })
                 ch_fft = ch.data.map((d)=>{
                     return d[1]
                 })
@@ -129,7 +127,7 @@ function FFTGraph(width, height, id){
                 this.xaxis.transition()
                     .duration(0)
                     .ease('linear')
-                    
+                    .call(this.x.axis)
             }
         }   
     }
