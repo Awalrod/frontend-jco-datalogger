@@ -98,10 +98,11 @@ function FFTGraph(width, height, id){
                     if(i>0){
                         t1 = ch.data[i][0] //timestamp
                         t0 = ch.data[i-1][0]
-                        dif = ((dif*i-1)+Math.abs(t1-t0))/i //rolling average
+                        a = .99
+                        dif = (a)*dif+(1-a)*(Math.abs(t1-t0)) //newer samples have more weight than older ones
                     }
                 }
-                sr = 1000/dif
+                sr = 1000/dif //uh oh
                 f_axis = new Array(this.desiredSize/2).fill(0).map((d,i)=>{
                     return i*(sr/2)/(this.desiredSize/2)
                 })
@@ -121,6 +122,7 @@ function FFTGraph(width, height, id){
                     return [d,ch_mod_half[i]]
                 })
                 this.x.domain([0,f_axis[f_axis.length-1]])
+                console.log(f_axis[f_axis.length-1])
                 path = this.paths.select('#'+ch.name)
                     .data([ch_zipped])
                     .attr('d',this.line)
@@ -128,6 +130,7 @@ function FFTGraph(width, height, id){
                     .duration(0)
                     .ease('linear')
                     .call(this.x.axis)
+                    
             }
         }   
     }
