@@ -580,13 +580,6 @@
           $("#sampleRate").blur()
         }
       })
-
-      //////////////////////////////////////
-      // event handlers for stream (General)
-      $(document).on("click","#startStream",startStream)
-      $(document).on("click","#stopStream",stopStream)
-      // the node and Graph refresh rate will be left as they are
-      // too much hassle
       
       /////////////////////////////////////
       // event handlers for sidebar channel interface
@@ -601,13 +594,18 @@
       })
       $(document).on('click','.remove-channel-btn', removeChannel)
       
+      //////////////////////////////////////
+      // event handlers for stream (General)
+      $(document).on("click","#startStream",startStream)
+      $(document).on("click","#stopStream",stopStream)
+      
+      
       /////////////////////////////////////
       // event handlers for stream display
       $("#rangeSlider").slider().on('change',changeSliderVal)
       $(document).on("click","#zoomIn", zoomIn)
       $(document).on("click","#zoomOut", zoomOut)
       $(document).on("change","input:radio[id^='filter_']",filterToggle)
-      $(document).on("change","input:checkbox[id^='channel_']",channelToggle)
       
       /////////////////////////////////////
       // event handlers for file management
@@ -901,17 +899,6 @@
           isAC = true;
         }
       }
-      
-      function channelToggle(event){
-        streamGraph.Node.x.vis= $("#channel_x").prop('checked')  
-        streamGraph.Node.y.vis= $("#channel_y").prop('checked')
-        streamGraph.Node.z.vis= $("#channel_z").prop('checked')  
-        streamGraph.Node.mag.vis= $("#channel_mag").prop('checked')
-        streamGraph.updateGraph()
-      }
-      
-      
-      
       
       $(document).ready(function(){
         initChannels()
