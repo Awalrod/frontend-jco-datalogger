@@ -1,7 +1,7 @@
 // gcdcNode constructor
 
 function gcdcNode(nodeIndex){
-    this.channels = ['x','y','z','mag']
+    this.channels = ['x','y','z','id', 'mag']
     this.limit = 2000 //10 seconds of data at 200Hz
     this.nodeIndex = nodeIndex
     for(i in this.channels){
