@@ -286,7 +286,9 @@
       }
       streamSocket.onmessage = function(event){
         if(document.getElementById("streamTab").classList.contains("active")){
-          sensorDataList = JSON.parse(event.data)
+	var frame = JSON.parse(event.data)
+	sensorDataList = frame.data
+//          sensorDataList = JSON.parse(event.data)
           filter = isAC? iirFilter : dummyFilter; //both are located in gcdc.js
           for(i in sensorDataList){
             nodeList[i].appendData(sensorDataList[i],filter)
