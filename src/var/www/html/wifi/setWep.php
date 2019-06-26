@@ -13,16 +13,16 @@
  session_start();
  $a = $_SESSION['key'];
  session_write_close();
-                                                      
+ $ssid = filter_input(INPUT_GET, 'ssid', FILTER_SANITIZE_URL);
 // Work & modify the global & private context (be ware of changing the global context!)
 ?>
 <title>JCO-Dataloger set web</title>
 <?php include ("./include/links.shtml"); ?>
-
   <h1>Test 2: Global Count is: <?=++$a?></h1>
   <h1>Test 2: Your Count is: <?=++$b?></h1>
   <h1>Private ID is <?=$private_id?></h1>
   <h1>Gloabl ID is <?=session_id()?></h1>
+  <h2>WIFI: <?=ssid?></h2>
   <pre>
    <?php print_r($_SESSION); ?>
   </pre>
