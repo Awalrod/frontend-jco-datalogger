@@ -1,0 +1,9 @@
+Package: front-jco-datalogger
+Version: 0.0-1
+Maintainer: mike <mpcrowe@gmail.com>
+Section: text
+Architecture: all
+Priority: optional
+Homepage : http://www.gcdataconcepts.com/
+Depends: apache2 (>=2.4.0), can-utils (>=0.0)
+Description: Web interface for jco-datalogger
