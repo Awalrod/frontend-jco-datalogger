@@ -74,11 +74,18 @@ body {
 	margin-right: 10px;
 }
 
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+
 td, th {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12px;
 	line-height: 24px;
 	color: #333333;
+	border: 1px solid black;
 }
 
 a {
@@ -189,6 +196,7 @@ form {
 	line-height: 22px;
 	color: #F6F4F1;
 	background-color: #0083B3;
+	text-align: center;
 }
 
 .legal {

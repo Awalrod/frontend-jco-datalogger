@@ -19,12 +19,14 @@ NUL = /dev/null
 all: 
 	-@mkdir -p $(TMP_DIR) 2>&1 1>$(NUL)
 	@mkdir -p tempsrc
-	git pull
+#	git pull
 #	svn checkout http://gcdc-crowe/svn/gcdc1317/debian_pkg/src tempsrc
 	rsync -a $(SRC)/* $(TMP_DIR) --exclude=.svn --exclude=*~
 	rm -rf tempsrc
 	@dpkg-deb --build $(TMP_DIR) $(TARGET)
-	
+
+install: $(TARGET)
+	dpkg -i $(TARGET)
 
 clean:
 	@rm -rf $(TMP_DIR)
