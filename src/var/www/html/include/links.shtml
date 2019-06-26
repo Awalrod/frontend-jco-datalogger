@@ -1,0 +1,19 @@
+</head>
+
+<body id="mainbody">
+	<div id="Banner">
+	        <img src="/images/banner2.jpg" alt="Gulf Coast Data Concepts, LLC" width="760" height="200" border="0" />
+	</div>
+	<div id="NavShadow">
+		<div id="Navigation">
+			<span class="style4">Options</span>
+			<hr></hr>
+			<p class="nav"><a href="./realtime.html">Realtime Mon</a></p>
+			<p class="nav"><a href="./getBom.php">Bill Of Materials</a></p>
+			<p class="nav"><a href="./orderParts.php">Determine Short</a></p>
+			<p class="nav"><a href="./editPart.php">Edit Part Database</a></p>
+			<p class="nav"><a href="./editInventory.php">Edit Inventory Database</a></p>
+		</div>
+	</div>
+	<p>&nbsp;</p>
+	<div id="MainBlock">

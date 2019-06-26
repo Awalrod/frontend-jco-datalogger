@@ -1,67 +1,8 @@
 #!/bin/sh
-CONFIG=/boot/config.txt
 set -e
 
-SETTING="on,i2c_arm_baudrate=300000"
-# setup i2c
-sed $CONFIG -i -e "s/^#dtparam=i2c_arm/dtparam=i2c_arm/"
-sed $CONFIG -i -e "s/^#device_tree_param=i2c_arm/device_tree_param=i2c_arm/"
-sed $CONFIG -i -r -e "s/^((device_tree_param|dtparam)=i2c(_arm)?).*/\1=${SETTING}/"
-if ! grep -q -E "^(device_tree_param|dtparam)=([^,]*,)*i2c(_arm)?=[^,]*" $CONFIG; then
-printf "dtparam=i2c_arm=$SETTING\n" >> $CONFIG
-fi
+# update needed changes in apache2
+sudo a2enmod include
+sudo service apache2 restart
 
-SPI_SETTING="on"
-# setup spi
-sed $CONFIG -i -e "s/^#dtparam=spi/dtparam=spi/"
-sed $CONFIG -i -e "s/^#device_tree_param=spi/device_tree_param=spi/"
-sed $CONFIG -i -r -e "s/^((device_tree_param|dtparam)=([^,]*,)*spi?)(=[^,]*)?/\1=$SPI_SETTING/"
-if ! grep -q -E "^(device_tree_param|dtparam)=([^,]*,)*spi?=[^,]*" $CONFIG; then
-printf "dtparam=spi=$SPI_SETTING\n" >> $CONFIG
-fi
-
-CAN_SETTING="oscillator=16000000,interrupt=25"
-# setup spi
-sed $CONFIG -i -e "s/^#dtoverlay=mcp2515-can0/dtoverlay=mcp2515-can0/"
-sed $CONFIG -i -r -e "s/^(dtoverlay=mcp2515-can0).*/\1,$CAN_SETTING/"
-if ! grep -q -E "^(dtoverlay)=mcp2515-can0*" $CONFIG; then
-printf "\n# can-bus see interface http://skpang.co.uk/blog/archives/1165 for details\n" >> $CONFIG
-printf "dtoverlay=mcp2515-can0,$CAN_SETTING\n" >> $CONFIG
-fi
-
-# setup spi_bcm2835
-SPI_BCM=spi-bcm2835
-sed $CONFIG -i -e "s/^#dtoverlay=${SPI_BCM}/dtoverlay=${SPI_BCM}/"
-if ! grep -q -E "^(dtoverlay)=${SPI_BCM}*" $CONFIG; then
-printf "dtoverlay=${SPI_BCM}\n" >> $CONFIG
-fi
-
-# setup RTC
-RTC_CONFIG=",ds3231,wakeup-source=5"
-sed $CONFIG -i -e "s/^#dtoverlay=i2c-rtc/dtoverlay=i2c-rtc/"
-if ! grep -q -E "^(dtoverlay)=i2c-rtc*" $CONFIG; then
-printf "\n# real time clock\n" >> $CONFIG
-printf "dtoverlay=i2c-rtc${RTC_CONFIG}\n" >> $CONFIG
-fi
-
-# setup modules i2c-dev
-MODULES=/etc/modules
-if ! grep -q -E "^i2c-dev*" $MODULES; then
-printf "\n# i2c-dev\n" >> $MODULES
-printf "i2c-dev\n" >> $MODULES
-fi
-
-HM_DIR=/home/pi/.bashrc
-if ! grep -q -E "upsAddPid" $HM_DIR; then
-printf "\nif [ -x /usr/bin/upsAddPid.sh ]; then\n" >> $HM_DIR
-printf "\t/usr/bin/upsAddPid.sh \$\$\n" >> $HM_DIR
-printf "fi\n" >> $HM_DIR
-fi
-
-
-# start the ups monitor daemon
-sudo update-rc.d -f ups-monitor defaults
-sudo service ups-monitor start
-
-sudo update-rc.d -f fake-hwclock remove
 

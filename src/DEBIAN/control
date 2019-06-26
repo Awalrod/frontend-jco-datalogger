@@ -5,5 +5,5 @@ Section: text
 Architecture: all
 Priority: optional
 Homepage : http://www.gcdataconcepts.com/
-Depends: apache2 (>=2.4.0), can-utils (>=0.0)
-Description: Web interface for jco-datalogger
+Depends: apache2 (>=2.4.0), php7.0 (>=7.0), libapache2-mod-php7.0
+Description: Web interface frontend jco-datalogger
