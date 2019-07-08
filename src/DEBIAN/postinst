@@ -10,8 +10,8 @@ then
 	sudo a2enmod include >/dev/null 2>&1
 fi
 
-rm /etc/apache2/sites-enabled/000-default.conf
-ln -s /etc/apache2/sites-available/jcodatalogger.conf /etc/apache2/sites-enabled/000-default.conf
+#rm /etc/apache2/sites-enabled/000-default.conf
+#ln -s /etc/apache2/sites-available/jcodatalogger.conf /etc/apache2/sites-enabled/000-default.conf
 sudo service apache2 restart
 
 echo "end of postinst script"
