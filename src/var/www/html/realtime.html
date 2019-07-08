@@ -287,7 +287,7 @@
       streamSocket.onmessage = function(event){
         if(document.getElementById("streamTab").classList.contains("active")){
 	var frame = JSON.parse(event.data)
-	sensorDataList = frame.data
+	sensorDataList = frame.accel1
 //          sensorDataList = JSON.parse(event.data)
           filter = isAC? iirFilter : dummyFilter; //both are located in gcdc.js
           for(i in sensorDataList){
@@ -303,7 +303,7 @@
           streamGraph.updateData(chWithColor)
         }
         else{
-          sensorDataList = JSON.parse(event.data)
+	  sensorDataList = JSON.parse(event.data)
           for(i in sensorDataList){
             nodeList[i].appendData(sensorDataList[i])
           }
@@ -746,8 +746,8 @@
         if( !(isDisplayed)){
           node = Number(newId.split('n')[1].split('c')[0])
           channel = newId.split('c')[1]
-          console.log(node)
-          console.log(channel)
+//          console.log(node)
+//          console.log(channel)
           displayedChannels.push(nodeList[node][channel])
           d3.select('#displayedChannelsList').append('li')
             .attr('id',newId+'_card')
