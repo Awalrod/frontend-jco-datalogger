@@ -12,17 +12,19 @@ BASE = $(shell grep Package $(CONTROL) | awk '{print $$2}')
 ARCH = $(shell grep Architecture $(CONTROL) | awk '{print $$2}')
 BASENAME=$(BASE)_$(VERSION)_$(ARCH)
 
+DEPS=$(shell find $(SRC) -print)
+
 #TARGET_SRC=DEBIAN/control DEBIAN/postinst usr/bin/upsPowerOff.sh usr/bin/upsStatus.sh usr/bin/upsVbat.sh etc/init.d/ups-monitor lib/systemd/system/systemd-ups-monitor.service
 #SRC=$(patsubst %,./src/%,$(TARGET_SRC))
 NUL = /dev/null
 
-all: 
+all: $(TARGET)
+
+$(TARGET): $(DEPS) Makefile
+	@rm -rf $(TMP_DIR)
 	-@mkdir -p $(TMP_DIR) 2>&1 1>$(NUL)
-	@mkdir -p tempsrc
 #	git pull
-#	svn checkout http://gcdc-crowe/svn/gcdc1317/debian_pkg/src tempsrc
 	rsync -a $(SRC)/* $(TMP_DIR) --exclude=.svn --exclude=*~
-	rm -rf tempsrc
 	@dpkg-deb --build $(TMP_DIR) $(TARGET)
 
 install: $(TARGET)
@@ -31,5 +33,3 @@ install: $(TARGET)
 clean:
 	@rm -rf $(TMP_DIR)
 	@rm -rf $(TARGET)
-
-
