@@ -303,7 +303,9 @@
           streamGraph.updateData(chWithColor)
         }
         else{
-	  sensorDataList = JSON.parse(event.data)
+	  var frame = JSON.parse(event.data)
+//	  sensorDataList = JSON.parse(event.data)
+	  sensorDataList = frame.accel1
           for(i in sensorDataList){
             nodeList[i].appendData(sensorDataList[i])
           }
