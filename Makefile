@@ -28,7 +28,7 @@ $(TARGET): $(DEPS) Makefile
 	@dpkg-deb --build $(TMP_DIR) $(TARGET)
 
 install: $(TARGET)
-	dpkg -i $(TARGET)
+	sudo dpkg -i $(TARGET)
 
 clean:
 	@rm -rf $(TMP_DIR)

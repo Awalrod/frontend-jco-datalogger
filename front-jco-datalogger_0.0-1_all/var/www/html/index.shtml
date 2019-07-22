@@ -1,0 +1,10 @@
+<!--#include file="include/header.shtml" -->
+        <title>JCO-Datalogger</title>
+
+<!--#include file="include/links.shtml" -->
+
+<div id="header"><h2>JCO-Datalogger</h2></div>
+
+<a href="./realtime.html">Realtime monitoring</a></br>
+
+<!--#include file="include/footer.shtml" -->
