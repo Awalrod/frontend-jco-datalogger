@@ -1,7 +1,0 @@
-{
-	"short_name" : "Datalogger",
-	"name" : "GCDC DataLogger",
-	"start_url" : "index.html",
-	"display" : "standalone",
-	"orientation" : "landscape"
-}
