@@ -18,16 +18,17 @@ if(($fileType == "key") && strpos($target_file, 'private')){
         $save_name = "Private.pem.key";
 }
 
-if(strlen($target_file) <= 0){
+if(strlen($ftempname) <= 0){
         echo " No file selected.";
-        $uploadOk = 0;
+        echo "</br> <a href=\"javascript:history.go(-1)\">Return</a> </br>";
+	return;
 } else {
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
     $check = filesize($ftempname);
     if($check != false) {
-        echo "File Accepted - " . $check["mime"];
+        echo "File Being Processed - " . $check["mime"];
         $uploadOk = 1;
     } else {
         echo "Incorrect File Type.";
@@ -61,7 +62,7 @@ if( ($fileType != "crt") && ($fileType != "pem") && ($fileType != "key")
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo " Your file was not uploaded.";
-    echo "<a href=\"javascript:history.go(-1)\"> Return </a>";
+    echo "</br> <a href=\"javascript:history.go(-1)\">Return</a> </br>";
 
 // if everything is ok, try to upload file
 } else {
