@@ -5,17 +5,16 @@ $ftempname = $_FILES["fileToUpload"]["tmp_name"];
 $uploadOk = 1;
 $fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 $save_name = "Default";
-
 if($fileType == "crt"){
-        $save_name = "AWS-Certificate.pem.crt";
+        $save_name = "certificate.pem.crt";
 
 }
 if(($fileType == "key") && strpos($target_file, 'public')){
-        $save_name = "Public.pem.key";
+        $save_name = "public.pem.key";
 
 }
 if(($fileType == "key") && strpos($target_file, 'private')){
-        $save_name = "Private.pem.key";
+        $save_name = "private.pem.key";
 }
 
 if(strlen($ftempname) <= 0){
@@ -67,7 +66,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
    if(move_uploaded_file($ftempname, $target_file)){
-         symlink($target_file , $target_dir . $save_name);
+         symlink(basename($_FILES["fileToUpload"]["name"]) , $target_dir . $save_name);
          echo "</br>" . $save_name . "</br>";
          echo "The file " . basename( $_FILES["fileToUpload"]["name"]) . " has been uploaded.";
          echo "</br> <a href=\"javascript:history.go(-1)\">Return</a> </br>";

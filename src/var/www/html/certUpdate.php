@@ -27,7 +27,7 @@ $directory = "/var/www/html/uploads/";
 <form action="upload.php" method="post" enctype="multipart/form-data">
     Select File to upload:
     <input type="file" name="fileToUpload" id="fileToUpload">
-    <input type="submit" value="Upload AWS FYile" name="submit">
+    <input type="submit" value="Confirm File Upload" name="submit">
 </form>
 
 <style type="text/css">
@@ -40,7 +40,7 @@ $directory = "/var/www/html/uploads/";
 </head>
 <body>
     <?php
-    $files = array("AWS-Certificate.pem.crt");
+    $files = array("certificate.pem.crt");
     foreach($files as $file){
         echo '<div class="img-box">';
             echo '<img src="/var/www/html/uploads/AWS-Certificate.pem.crt' . $file . '" width="200" alt="' .  pathinfo($file, PATHINFO_FILENAME) .'">';
@@ -49,7 +49,7 @@ $directory = "/var/www/html/uploads/";
     }
     ?>
     <?php
-    $files = array("Public.pem.key");
+    $files = array("public.pem.key");
     foreach($files as $file){
         echo '<div class="img-box">';
             echo '<img src="/var/www/html/uploads/' . $file . '" width="200" alt="' .  pathinfo($file, PATHINFO_FILENAME) .'">';
@@ -58,7 +58,7 @@ $directory = "/var/www/html/uploads/";
     }
     ?>
     <?php
-    $files = array("Private.pem.key");
+    $files = array("private.pem.key");
     foreach($files as $file){
         echo '<div class="img-box">';
             echo '<img src="/var/www/html/uploads/' . $file . '" width="200" alt="' .  pathinfo($file, PATHINFO_FILENAME) .'">';
@@ -81,6 +81,7 @@ $directory = "/var/www/html/uploads/";
 
  session_name('Global');
  session_id('$a');
+ session_save_path("uploads");
  session_start();
  $_SESSION['key']=$a;
  session_write_close();
