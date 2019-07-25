@@ -1,23 +1,4 @@
 <?php include ("./include/header.shtml"); ?>
-<?php
-$directory = "/var/www/html/uploads/";
-
-// Get the private context
- session_name('Private');
- session_start();
- $private_id = session_id();
- $b = $_SESSION['pr_key'];
- session_write_close();
-
-// Get the global context
- session_name('Global');
- session_start();
- $a = $_SESSION['key'];
- session_id('$a');
- session_write_close();
- $ssid = filter_input(INPUT_GET, 'ssid', FILTER_SANITIZE_URL);
-// Work & modify the global & private context (be ware of changing the global context!)
-?>
 <title>Update AWS Certificates</title>
 <?php include ("./include/links.shtml"); ?>
 <pre>
@@ -30,60 +11,5 @@ $directory = "/var/www/html/uploads/";
     <input type="submit" value="Confirm File Upload" name="submit">
 </form>
 
-<style type="text/css">
-    .img-box{
-        display: inline-block;
-        text-align: center;
-        margin: 0 15px;
-    }
 </style>
-</head>
-<body>
-    <?php
-    $files = array("certificate.pem.crt");
-    foreach($files as $file){
-        echo '<div class="img-box">';
-            echo '<img src="/var/www/html/uploads/AWS-Certificate.pem.crt' . $file . '" width="200" alt="' .  pathinfo($file, PATHINFO_FILENAME) .'">';
-            echo '<p><a href="downloadA.php?file=' . urlencode($file) . '">Download</a></p>';
-        echo '</div>';
-    }
-    ?>
-    <?php
-    $files = array("public.pem.key");
-    foreach($files as $file){
-        echo '<div class="img-box">';
-            echo '<img src="/var/www/html/uploads/' . $file . '" width="200" alt="' .  pathinfo($file, PATHINFO_FILENAME) .'">';
-            echo '<p><a href="downloadB.php?file=' . urlencode($file) . '">Download</a></p>';
-        echo '</div>';
-    }
-    ?>
-    <?php
-    $files = array("private.pem.key");
-    foreach($files as $file){
-        echo '<div class="img-box">';
-            echo '<img src="/var/www/html/uploads/' . $file . '" width="200" alt="' .  pathinfo($file, PATHINFO_FILENAME) .'">';
-            echo '<p><a href="downloadC.php?file=' . urlencode($file) . '">Download</a></p>';
-        echo '</div>';
-    }
-    ?>
-
-
-</body>
-</html>
 <?php include ("./include/footer.shtml"); ?>
-<?php
-// Store it back
- session_name('Private');
- session_id('');
- session_start();
- $_SESSION['pr_key'] = $b;
- session_write_close();
-
- session_name('Global');
- session_id('$a');
- session_save_path("uploads");
- session_start();
- $_SESSION['key']=$a;
- session_write_close();
-?>
-
