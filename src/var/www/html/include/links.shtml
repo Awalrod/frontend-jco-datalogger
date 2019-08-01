@@ -9,7 +9,7 @@
 			<span class="style4">Options</span>
 			<hr/>
 			<p class="nav"><a href="/realtime.html">Realtime Mon</a></p>
-			<p class="nav"><a href="/wifi/config.shtml">Wifi Config</a></p>
+			<p class="nav"><a href="/wifi/wifi.php">Wifi Config</a></p>
 			<p class="nav"><a href="/certUpdate.php">Update AWS Certs</a></p>
 			<p class="nav"><a href="/passwdchang.php">Update Password</a></p>
 		</div>

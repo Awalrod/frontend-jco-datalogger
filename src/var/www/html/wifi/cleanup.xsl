@@ -7,11 +7,6 @@
 <xsl:output method="html" indent="yes" encoding="MacRoman"/>
 
 <xsl:template match="wlan_devices">
-<xsl:comment>#include file="./include/header.shtml" </xsl:comment>
-		<title>JCO-Datalogger Wifi Config</title>
-<xsl:comment>#include file="./include/links.shtml" </xsl:comment>
-	<h1>JCO-Datalogger Wifi Config</h1>
-	Select from one of the available devices<br/><br/>
 	<xsl:element name="table">
 		<xsl:element name="thead">
 			<xsl:element name="tr">
@@ -22,7 +17,6 @@
 		<xsl:apply-templates/>  
 		</xsl:element>
 	</xsl:element>
-<xsl:comment>#include file="./include/footer.shtml" </xsl:comment>
 </xsl:template>
 
 <xsl:template match="device">
