@@ -12,7 +12,9 @@ fi
 
 #rm /etc/apache2/sites-enabled/000-default.conf
 #ln -s /etc/apache2/sites-available/jcodatalogger.conf /etc/apache2/sites-enabled/000-default.conf
+sudo chown root /etc/sudoers.d/020_apache
 sudo service apache2 restart
+mkdir -p /var/www/html/uploads
 chmod 777 /var/www/html/uploads
 echo "end of postinst script"
 exit 0
