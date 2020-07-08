@@ -9,14 +9,14 @@ function FFTGraph(width, height, id){
         .domain([0,100])
         .range([0,width])
     this.y = d3.scale.linear()
-        .domain([0,160])
+        .domain([0,80])
         .range([height,0])
     this.line = d3.svg.line()
         .x((d) =>{
             return this.x(d[0])
         })
         .y((d) =>{
-            return this.y(20*Math.log10(d[1]))
+            return this.y(20*Math.log10(d[1])-20*Math.log10(this.desiredSize) )
         })
     this.svg = d3.select(id).append('svg')
         .attr('class','chart')
