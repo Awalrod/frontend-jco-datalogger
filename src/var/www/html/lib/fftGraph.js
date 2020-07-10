@@ -1,5 +1,5 @@
 function FFTGraph(width, height, id){
-    this.desiredSize = 2**9 //powers of 2 work best 2**9=512 2**10=1024
+    this.desiredSize = 2**10 //powers of 2 work best 2**9=512 2**10=1024
     this.difs = new Array(this.desiredSize/4) //rolling average to calculate sample rate
     //this.data = d3.range(1).map(function(){
     //    return [0,0]
